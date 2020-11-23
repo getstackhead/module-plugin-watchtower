@@ -31,7 +31,7 @@ env:
   ROLE_NAME: getstackhead.stackhead_plugin_watchtower
   WEBSERVER: getstackhead.stackhead_webserver_nginx
   CONTAINER: getstackhead.stackhead_container_docker
-  PLUGINS: getstackhead.stackhead_plugin_watchtower
+  PLUGINS: "['getstackhead.stackhead_plugin_watchtower']"
   DOMAIN_NAME: "pr-${{ github.run_id }}-watchtower"
   DOMAIN_SUFFIX: "test.stackhead.io"
 
