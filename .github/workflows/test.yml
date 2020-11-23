@@ -28,15 +28,11 @@ on:
 #    branches: [master]
 
 env:
-  # todo: set your role name here
-  ROLE_NAME: <vendor>.stackhead_<type>_<name>
-  # todo: software to use as webserver
-  WEBSERVER: getstackhead.stackhead_webserver_nginx # if your module is a webserver module, set its name here
-  # todo: software to use as container provider
-  CONTAINER: getstackhead.stackhead_container_docker # if your module is a container module, set its name here
-  # todo: adjust domain name
-  DOMAIN_NAME: "pr-${{ github.run_id }}-myname"
-  # domain name
+  ROLE_NAME: getstackhead.stackhead_plugin_watchtower
+  WEBSERVER: getstackhead.stackhead_webserver_nginx
+  CONTAINER: getstackhead.stackhead_container_docker
+  PLUGINS: getstackhead.stackhead_plugin_watchtower
+  DOMAIN_NAME: "pr-${{ github.run_id }}-watchtower"
   DOMAIN_SUFFIX: "test.stackhead.io"
 
 # You should not need to change anything below.
@@ -67,14 +63,16 @@ jobs:
     if: github.event.pull_request.draft == false
     steps:
     - uses: actions/checkout@v2
+    - name: Remove Python 2 and old Ansible 2.9 version
+      run: sudo apt purge python ansible -y
     - name: Set up Python 3
       uses: actions/setup-python@v2
       with:
         python-version: '3.x'
-    - name: Uninstall old Ansible
-      run: ansible --version && sudo apt purge ansible -y
-    - name: Install Ansible v2.10 (GH actions currently uses 2.9)
-      run: sudo python -m pip install ansible==2.10.0 && ansible --version
+    - name: Install Ansible v2.10.3 (GH actions currently uses 2.9)
+      run: pip install ansible==2.10.3
+    - name: Print Ansible and Python version
+      run: ansible --version && python --version
     - uses: webfactory/ssh-agent@v0.4.1
       with:
         ssh-private-key: "${{ secrets.SSH_PRIVATE_KEY }}"
@@ -117,6 +115,7 @@ jobs:
         domain2: 'sub.${{ env.DOMAIN_NAME }}.${{ env.DOMAIN_SUFFIX }}'
         webserver: '${{ env.WEBSERVER }}'
         container: '${{ env.CONTAINER }}'
+        plugins: '${{ env.PLUGINS }}'
         rolename: '${{ env.ROLE_NAME }}'
     - name: Remove DNS record
       uses: saitho/delete-dns-record@saitho-patch-1
