@@ -3,5 +3,5 @@
 - include_tasks: "{{ stackhead__roles }}/stackhead_module_api/tasks/system/register-container.yml"
   vars:
     stackhead_syscontainer_name: watchtower
-    stackhead_syscontainer_image: containrr/watchtower:latest
+    stackhead_syscontainer_image: containrrr/watchtower:latest
     stackhead_syscontainer_container_access: yes
