@@ -1,31 +1,9 @@
 name: Test
 
-# This workflow will setup an integration test environment
-# - launch webserver at Hetzner Cloud
-# - setup domain DNS at Cloudflare for two domains
-#   - [DOMAIN_NAME].[DOMAIN_SUFFIX]
-#   - sub.[DOMAIN_NAME].[DOMAIN_SUFFIX]
-#
-# This test workflow requires the following environment variables:
-# - SSH_PRIVATE_KEY
-# - CLOUDFLARE_TOKEN
-# - CLOUDFLARE_ZONE
-# - HETZNER_TOKEN
-
-# Also create a label "action/integration-test"
-# Only pull requests with that label will be integration tested
-
-# disable GH action for template
-# remove and uncommment below "on" block when using in production
 on:
-  push:
-    branches-ignore:
-      - '**'
-
-#on:
-#  pull_request:
-#    types: [opened, labeled, unlabeled, synchronize]
-#    branches: [master]
+  pull_request:
+    types: [opened, labeled, unlabeled, synchronize]
+    branches: [master]
 
 env:
   ROLE_NAME: getstackhead.stackhead_plugin_watchtower
