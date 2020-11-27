@@ -1,0 +1,5 @@
+# This task removes the Watchtower container
+---
+- include_tasks: "{{ stackhead__roles }}/stackhead_module_api/tasks/system/unregister-container.yml"
+  vars:
+    stackhead_syscontainer_name: watchtower

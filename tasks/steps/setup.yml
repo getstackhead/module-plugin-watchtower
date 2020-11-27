@@ -1,4 +1,7 @@
-# This task should install the software on the server.
+# This task installs the Watchtower container
 ---
-- debug:
-    msg: "Install your software here. You may include other roles and run smoke tests"
+- include_tasks: "{{ stackhead__roles }}/stackhead_module_api/tasks/system/register-container.yml"
+  vars:
+    stackhead_syscontainer_name: watchtower
+    stackhead_syscontainer_image: containrr/watchtower:latest
+    stackhead_syscontainer_container_access: yes
