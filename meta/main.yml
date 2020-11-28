@@ -1,8 +1,8 @@
 galaxy_info:
-  role_name: stackhead_[ŧype]_[name]]
-  author: [Your name]
-  description: A nice module for StackHead (add proper description)
-  issue_tracker_url: [Your GitHub URL]
+  role_name: stackhead_plugin_watchtower
+  author: Mario Lubenka
+  description: Run Watchtower on your Docker container
+  issue_tracker_url: https://github.com/getstackhead/module-plugin-watchtower
   license: GPLv3
 
   min_ansible_version: 2.9
@@ -11,6 +11,3 @@ galaxy_info:
     - stackhead
     - stackhead-module
 
-# Place dependencies here
-#dependencies:
-#  - role: nginxinc.nginx
